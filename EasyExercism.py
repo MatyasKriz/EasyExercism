@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
+import re
 import sys
 import signal
 import argparse
 import subprocess
-import re
 
 
 def signal_handler(signal, frame):
