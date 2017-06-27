@@ -21,7 +21,7 @@ def get_info(language):
 
     project_name = ''
     path = ''
-    is_new_problem = False
+    is_new_problem = True
     for line in output.decode("utf-8").split('\n'):
         if line.startswith(language):
             try:
@@ -30,8 +30,8 @@ def get_info(language):
             except AttributeError:
                 print('Problem with parsing project name and path to project')
                 sys.exit(2)
-        elif 'new' in line:
-            is_new_problem = True
+        elif 'new: 0' in line:
+            is_new_problem = False
 
     if not project_name:
         print('Couldn\'t find any project')
