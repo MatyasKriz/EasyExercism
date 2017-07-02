@@ -5,6 +5,7 @@ import sys
 import signal
 import argparse
 import subprocess
+from os import walk
 
 
 def signal_handler(signal, frame):
@@ -67,7 +68,11 @@ def submit_solution(language, submit_all, suffix):
         file_suffix = input('What suffix is your language using? ')
 
     if submit_all:
-        pass
+        bash_command = "exercism submit "
+        (_, _, filenames) = walk(path).next()
+
+        for file in filenames:
+            bash_command += "{0}/Sources/{1}.{2} ".format(path, file, file_suffix)
     else:
         bash_command = "exercism submit {0}/Sources/{1}.{2}".format(path, file_name, file_suffix)
         subprocess.call(['bash', '-c', bash_command])
